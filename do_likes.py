@@ -5,6 +5,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 import smtplib
+import sys
 
 sys.path.insert(0, '../InstaPy/')
 
@@ -38,7 +39,7 @@ def main():
                 session.like_by_tags(tags, amount=number_of_likes_by_tag)
     
     except Exception as exception:
-        _send_report(subject='Something when wrong', body=e)
+        _send_report(subject='Something when wrong on Instagramer', body=e)
 
     finally:
         body = 'Number of images liked: '.format(session.liked_img)
@@ -46,7 +47,7 @@ def main():
         session.end()
 
 
-def _send_report(**kwargs)
+def _send_report(**kwargs):
     
     toaddr = "roger.domenech.aguilera@gmail.com, demayorquierosermochilera@gmail.com"
     msg = MIMEMultipart()
