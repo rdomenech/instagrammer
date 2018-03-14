@@ -27,7 +27,7 @@ def main():
 
     try:
         session = InstaPy(username=insta_username, password=insta_password,
-                          headless_browser=False, multi_logs=True)
+                          headless_browser=True, multi_logs=False)
         session.login()
 
         number_of_likes_by_tag = int(900 / len(tags))
@@ -38,12 +38,13 @@ def main():
                 number_of_likes_by_tag = (900 - session.liked_img) / len(tags)
                 session.like_by_tags(tags, amount=number_of_likes_by_tag)
     
-    except Exception as exception:
-        _send_report(subject='Something when wrong on Instagramer', body=e)
-
-    finally:
         body = 'Number of images liked: '.format(session.liked_img)
         _send_report(body=body)
+
+    except Exception as exception:
+        _send_report(subject='Something when wrong on Instagramer', body=exception)
+
+    finally:
         session.end()
 
 
