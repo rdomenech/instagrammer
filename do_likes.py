@@ -38,7 +38,7 @@ def main():
                 number_of_likes_by_tag = (900 - session.liked_img) / len(tags)
                 session.like_by_tags(tags, amount=number_of_likes_by_tag)
     
-        body = 'Number of images liked: '.format(session.liked_img)
+        body = 'Number of images liked: {}'.format(session.liked_img)
         _send_report(body=body)
 
     except Exception as exception:
