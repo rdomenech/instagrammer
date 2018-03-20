@@ -25,9 +25,9 @@ def main():
         reader = csv.reader(f)
         tags = [row[0] for row in reader]
 
+    session = InstaPy(username=insta_username, password=insta_password,
+                      headless_browser=True, multi_logs=False)
     try:
-        session = InstaPy(username=insta_username, password=insta_password,
-                          headless_browser=True, multi_logs=False)
         session.login()
 
         number_of_likes_by_tag = int(900 / len(tags))
@@ -35,14 +35,14 @@ def main():
         session.like_by_tags(tags, amount=number_of_likes_by_tag)
         
         if session.liked_img < 900:
-                number_of_likes_by_tag = (900 - session.liked_img) / len(tags)
+                number_of_likes_by_tag = int((900 - session.liked_img) / len(tags))
                 session.like_by_tags(tags, amount=number_of_likes_by_tag)
     
         body = 'Number of images liked: {}'.format(session.liked_img)
         _send_report(body=body)
 
     except Exception as exception:
-        _send_report(subject='Something when wrong on Instagramer', body=exception)
+        _send_report(subject='Something when wrong on Instagramer', body=str(exception))
 
     finally:
         session.end()
