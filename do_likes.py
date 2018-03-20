@@ -7,8 +7,6 @@ import os
 import smtplib
 import sys
 
-sys.path.insert(0, '../InstaPy/')
-
 from instapy import InstaPy
 
 insta_username = os.environ.get('INSTA_USER')
