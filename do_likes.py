@@ -26,7 +26,7 @@ def main():
         tags = [row[0] for row in reader]
 
     session = InstaPy(username=insta_username, password=insta_password,
-                      headless_browser=True, multi_logs=False)
+                      headless_browser=True, multi_logs=False, nogui=True)
     try:
         session.login()
 
