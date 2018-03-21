@@ -7,6 +7,8 @@ import os
 import smtplib
 import sys
 
+sys.path.insert(0, '../InstaPy/')
+
 from instapy import InstaPy
 
 insta_username = os.environ.get('INSTA_USER')
@@ -23,8 +25,8 @@ def main():
         reader = csv.reader(f)
         tags = [row[0] for row in reader]
 
-    session = InstaPy(username=insta_username, password=insta_password,
-                      headless_browser=True, multi_logs=False, nogui=True)
+    session = InstaPy(username=insta_username, password=insta_password, headless_browser=True,
+                      multi_logs=False, nogui=True)
     try:
         session.login()
 
