@@ -80,6 +80,7 @@ def main():
             interact(session, tags)
 
         except Exception as exception:
+            print(exception)
             retries_count += 1
             # _send_report(subject='Something when wrong on Instagramer', body=str(exception))
 
