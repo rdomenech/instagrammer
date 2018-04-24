@@ -39,7 +39,10 @@ def interact(session, tags):
     friends = read_csv('{}/{}'.format(dir_path, users_filename))
 
     counter = 0
-    session.set_upper_follower_count(limit=3000)
+    session.set_relationship_bounds(
+        enabled=True, potency_ratio=None,
+        delimit_by_numbers=True, max_followers=3000,
+        max_following=None, min_followers=50, min_following=100)
     session.set_lower_follower_count(limit=1)
     session.set_dont_include(friends)
     session.set_do_comment(enabled=True, percentage=25)
