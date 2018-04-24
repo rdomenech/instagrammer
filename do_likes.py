@@ -42,7 +42,7 @@ def interact(session, tags):
     session.set_relationship_bounds(
         enabled=True, potency_ratio=None,
         delimit_by_numbers=True, max_followers=3000,
-        max_following=None, min_followers=50, min_following=100)
+        max_following=100000, min_followers=50, min_following=100)
     session.set_dont_include(friends)
     session.set_do_comment(enabled=True, percentage=25)
     session.set_comments(comments, media='Photo')
