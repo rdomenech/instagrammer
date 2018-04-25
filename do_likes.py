@@ -44,8 +44,8 @@ def interact(session, tags):
         delimit_by_numbers=True, max_followers=3000,
         max_following=100000, min_followers=50, min_following=100)
     session.set_dont_include(friends)
-    session.set_do_comment(enabled=True, percentage=25)
-    session.set_comments(comments, media='Photo')
+    #session.set_do_comment(enabled=True, percentage=25)
+    #session.set_comments(comments, media='Photo')
 
     for tag in tags:
         number_of_likes_by_tag = round((max_likes - session.liked_img) / (len(tags) - counter))
