@@ -20,7 +20,7 @@ email_password = os.environ.get('EMAIL_PASSWORD')
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 max_likes = 900
-max_retries = 10
+max_retries = 40
 
 users_filename = 'users.csv'
 tags_filename = 'hashtags.csv'
