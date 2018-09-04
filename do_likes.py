@@ -7,6 +7,8 @@ import os
 import random
 import smtplib
 import sys
+import schedule
+import time
 
 sys.path.insert(0, '../InstaPy/')
 
@@ -59,7 +61,7 @@ def read_csv(path):
         return [row[0] for row in reader]
 
 
-def main():
+def job():
 
     retries_count = 0
 
@@ -107,6 +109,11 @@ def _send_report(**kwargs):
     server.sendmail(fromaddr, toaddr, text)
     server.quit()
 
+schedule.every().day.at("15:49").do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
 
 if __name__ == ('__main__'):
-    main()
+    job()
