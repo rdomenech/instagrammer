@@ -26,7 +26,7 @@ max_retries = 40
 users_filename = 'users.csv'
 tags_filename = 'hashtags.csv'
 
-def interact(session, tags):
+def interact(session, tags, max_likes):
 
     friends = read_csv('{}/{}'.format(dir_path, users_filename))
 
@@ -47,7 +47,6 @@ def read_csv(path):
     with open(path, 'r+') as f:
         reader = csv.reader(f)
         return [row[0] for row in reader]
-
 
 def main(max_likes):
 
@@ -71,7 +70,7 @@ def main(max_likes):
                 session.like_by_tags([tag], amount=pending_likes)
                 break
 
-            interact(session, tags)
+            interact(session, tags, max_likes)
 
         except Exception as exception:
             print(exception)
