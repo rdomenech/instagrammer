@@ -21,20 +21,10 @@ email_password = os.environ.get('EMAIL_PASSWORD')
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
-max_likes = 900
 max_retries = 40
 
 users_filename = 'users.csv'
 tags_filename = 'hashtags.csv'
-
-comments = [
-    'Very nice pic @{}, I really love it!',
-    'I love this picture @{}!!!',
-    'What an amazing photo @{}!!',
-    'You have an awesome instagram account! If you want you can check mine...',
-    "I've checked your instagram account and it's awesome!"
-    ]
-
 
 def interact(session, tags):
 
@@ -46,8 +36,6 @@ def interact(session, tags):
         delimit_by_numbers=True, max_followers=3000,
         max_following=100000, min_followers=50, min_following=100)
     session.set_dont_include(friends)
-    #session.set_do_comment(enabled=True, percentage=25)
-    #session.set_comments(comments, media='Photo')
 
     for tag in tags:
         number_of_likes_by_tag = round((max_likes - session.liked_img) / (len(tags) - counter))
@@ -61,7 +49,9 @@ def read_csv(path):
         return [row[0] for row in reader]
 
 
-def job():
+def main(max_likes):
+
+    print('Running intagramer with max_likes = {}'.format(max_likes))
 
     retries_count = 0
 
@@ -86,34 +76,8 @@ def job():
         except Exception as exception:
             print(exception)
             retries_count += 1
-            # _send_report(subject='Something when wrong on Instagramer', body=str(exception))
 
     session.end()
 
-
-def _send_report(**kwargs):
-    
-    toaddr = "roger.domenech.aguilera@gmail.com, demayorquierosermochilera@gmail.com"
-    msg = MIMEMultipart()
-    msg['From'] = email_username
-    msg['To'] = toaddr
-    msg['Subject'] = kwargs.get('subject', 'Instagramer report')
-     
-    body = kwargs.get('body', '')
-    msg.attach(MIMEText(body, 'plain'))
-     
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login(email_username, email_password)
-    text = msg.as_string()
-    server.sendmail(fromaddr, toaddr, text)
-    server.quit()
-
-schedule.every().day.at("15:49").do(job)
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)
-
 if __name__ == ('__main__'):
-    job()
+    main()
