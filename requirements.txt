@@ -15,3 +15,4 @@ schedule==0.5.0
 selenium==3.13.0
 smmap2==2.0.3
 urllib3==1.23
+instapy==0.2.3
