@@ -1,14 +1,9 @@
 #!/usr/local/bin/python
 
 import csv
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
 import os
-import random
-import smtplib
 import sys
 import schedule
-import time
 
 sys.path.insert(0, '../InstaPy/')
 
